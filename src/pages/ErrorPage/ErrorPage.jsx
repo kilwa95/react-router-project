@@ -1,30 +1,59 @@
-import { useRouteError } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useRouteError, isRouteErrorResponse, Link } from 'react-router-dom';
 import styles from './ErrorPage.module.scss';
 
 export default function ErrorPage() {
   const error = useRouteError();
-  console.log(error);
 
   return (
-    <div className={styles['error-page']}>
-      <h1>Oops! 😟</h1>
-      <h2>Une erreur est survenue</h2>
-
-      <div className={styles['error-details']}>
-        <p className={styles['error-message']}>
-          {error.message ||
-            error.statusText ||
-            "Une erreur inattendue s'est produite"}
-        </p>
-        {error.status && (
-          <p className={styles['error-status']}>Status: {error.status}</p>
+    <div
+      className={`${styles.errorContainer} d-flex flex-column align-items-center justify-content-center`}
+    >
+      <h1>Oops!</h1>
+      <div className={styles.errorContent}>
+        {isRouteErrorResponse(error) ? (
+          <>
+            {error.status === 404 && (
+              <>
+                <h2>404 - Page non trouvée</h2>
+                <p>Désolé, la page que vous recherchez n&apos;existe pas.</p>
+              </>
+            )}
+            {error.status === 401 && (
+              <>
+                <h2>401 - Non autorisé</h2>
+                <p>
+                  Vous n&apos;avez pas les droits pour accéder à cette page.
+                </p>
+              </>
+            )}
+            {error.status === 503 && (
+              <>
+                <h2>503 - Service indisponible</h2>
+                <p>
+                  Le service est temporairement indisponible. Veuillez réessayer
+                  plus tard.
+                </p>
+              </>
+            )}
+            {![404, 401, 503].includes(error.status) && (
+              <>
+                <h2>Erreur {error.status}</h2>
+                <p>{error.statusText}</p>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <h2>Une erreur inattendue s&apos;est produite</h2>
+            <p>Nous sommes désolés, quelque chose s&apos;est mal passé.</p>
+          </>
         )}
+        <div className={styles.errorActions}>
+          <Link to="/" className="btn btn-primary">
+            Retour à l&apos;accueil
+          </Link>
+        </div>
       </div>
-
-      <Link to="/" className={styles['home-link']}>
-        Retourner à l&apos;accueil
-      </Link>
     </div>
   );
 }
