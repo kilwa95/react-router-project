@@ -1,5 +1,6 @@
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import { Outlet } from 'react-router-dom';
 import styles from './App.module.scss';
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
     <div className={`d-flex flex-column ${styles.appContainer}`}>
       <Header />
       <div className="flex-fill">
-        <h1>App</h1>
+        <Outlet />
       </div>
       <Footer />
     </div>
