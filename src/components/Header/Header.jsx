@@ -2,7 +2,7 @@ import { NavLink, useMatch } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 function Header() {
-  const matchProfile = useMatch('/profile');
+  const matchProfile = useMatch('/profile/:id');
   const matchHomepage = useMatch('/');
 
   console.log(matchProfile);
@@ -17,7 +17,7 @@ function Header() {
         <NavLink end to="/">
           Homepage
         </NavLink>
-        <NavLink to="/profile">Profile</NavLink>
+        <NavLink to="/profile/123?age=12">Profile</NavLink>
       </ul>
     </header>
   );
