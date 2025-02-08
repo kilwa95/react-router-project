@@ -5,6 +5,7 @@ import Profile from './pages/Profile/Profile';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ProfileOverview from './pages/Profile/pages/ProfileOverview/ProfileOverview';
 import ProfileData from './pages/Profile/pages/ProfileData/ProfileData';
+import { homepageLoader } from './loaders/homepageLoader';
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Homepage />,
+        loader: homepageLoader,
       },
       {
         path: '/profile/:id',
