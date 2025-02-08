@@ -5,24 +5,24 @@ import Profile from './pages/Profile/Profile';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ProfileOverview from './pages/Profile/pages/ProfileOverview/ProfileOverview';
 import ProfileData from './pages/Profile/pages/ProfileData/ProfileData';
-import { homepageLoader } from './loaders/homepageLoader';
-import { rootLoader } from './loaders/rootLoader';
+// import { rootLoader } from './loaders/rootLoader';
+import { profileLoader } from './loaders/profileLoader';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    loader: rootLoader,
+    // loader: rootLoader,
     errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         element: <Homepage />,
-        loader: homepageLoader,
       },
       {
-        path: '/profile/:id',
+        path: '/profile',
         element: <Profile />,
+        loader: profileLoader,
         caseSensitive: true,
         children: [
           {
@@ -34,10 +34,6 @@ export const router = createBrowserRouter([
             element: <ProfileData />,
           },
         ],
-      },
-      {
-        path: '/profile/*',
-        element: <Profile />,
       },
     ],
   },
