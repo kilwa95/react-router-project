@@ -13,10 +13,6 @@ export default function Profile() {
   const user = useOutletContext();
   const recipes = useLoaderData();
 
-  console.log(user);
-  console.log(id);
-  console.log(queryParams.get('age'));
-
   return (
     <>
       <ul className="d-flex p-20">
@@ -27,6 +23,9 @@ export default function Profile() {
         </li>
         <li>
           <NavLink to="data">Data</NavLink>
+        </li>
+        <li>
+          <NavLink to="form">Form</NavLink>
         </li>
       </ul>
       <div className="p-20">
