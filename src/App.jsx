@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Suspense } from 'react';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import {
@@ -13,10 +13,6 @@ function App() {
   const navigation = useNavigation();
   const user = useLoaderData();
 
-  useEffect(() => {
-    console.log(navigation);
-  }, [navigation]);
-
   return (
     <div className={`d-flex flex-column ${styles.appContainer}`}>
       <Header />
@@ -27,7 +23,9 @@ function App() {
         </h1>
       )}
       <div className="flex-fill">
-        <Outlet context={user} />
+        <Suspense>
+          <Outlet context={{ user }} />
+        </Suspense>
       </div>
       <Footer />
       <ScrollRestoration />
